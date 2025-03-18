@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: radial-gradient(circle, #1a1a2e, #16213e, #0f3460);
+            color: #fff;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+        }
+        .circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff6600, #ffcc00);
+            border-radius: 50%;
+            position: absolute;
+            animation: float 3s infinite alternate ease-in-out, glow 1.5s infinite alternate;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.8);
+            transition: transform 0.3s ease, opacity 0.5s ease;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-20px) scale(1.1); }
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 15px rgba(255, 102, 0, 0.8); }
+            100% { box-shadow: 0 0 30px rgba(255, 204, 0, 1); }
+        }
+        .flower {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0);
+        }
+        .flower span {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ff4081, #ff80ab);
+            border-radius: 50%;
+            animation: petalFloat 1s infinite alternate ease-in-out;
+        }
+        .flower span:nth-child(1) { transform: rotate(0deg) translate(50px); }
+        .flower span:nth-child(2) { transform: rotate(72deg) translate(50px); }
+        .flower span:nth-child(3) { transform: rotate(144deg) translate(50px); }
+        .flower span:nth-child(4) { transform: rotate(216deg) translate(50px); }
+        .flower span:nth-child(5) { transform: rotate(288deg) translate(50px); }
+        
+        .flower .center {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ffd700, #ff8c00);
+            border-radius: 50%;
+            position: absolute;
+            animation: centerGlow 1.5s infinite alternate;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+        }
+        @keyframes centerGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
+            100% { box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+        }
+        .text {
+            position: absolute;
+            bottom: 10%;
+            font-size: 18px;
+            opacity: 0;
+            animation: fadeIn 4s forwards 2s, textMove 3s infinite alternate ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes textMove {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+        @keyframes disappear {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="circle" id="circle" onclick="showFlower()"></div>
+    <div class="flower" id="flower">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <div class="center"></div>
+    </div>
+    <div class="text">Made by Someone Special :)</div>
+    <script>
+        function showFlower() {
+            const flower = document.getElementById('flower');
+            const circle = document.getElementById('circle');
+            flower.style.opacity = '1';
+            flower.style.transform = 'scale(1)';
+            
+            circle.style.animation = 'disappear 0.5s forwards';
+            setTimeout(() => { circle.style.display = 'none'; }, 500);
+        }
+    </script>
+</body>
+</html>
